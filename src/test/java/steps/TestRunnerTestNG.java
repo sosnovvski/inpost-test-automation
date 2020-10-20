@@ -14,7 +14,7 @@ import support.SeleniumCore;
 @CucumberOptions(features = "src/test/resources/features", glue = { "steps" }, tags = { "~@ManualTest" })
 public class TestRunnerTestNG {
 	private TestNGCucumberRunner testNGCucumberRunner;
-	private static SeleniumCore seleniumCore;
+	protected static SeleniumCore seleniumCore;
 
 	@BeforeClass(alwaysRun = true)
 	public void setUpClass() {
