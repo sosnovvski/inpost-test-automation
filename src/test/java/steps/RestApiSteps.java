@@ -1,5 +1,10 @@
 package steps;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import api.RestService;
@@ -23,4 +28,15 @@ public class RestApiSteps {
 		assertEquals(this.status, expectedStatus, "Parcel tracking status is not correct");
 	}
 
+	@Given("^Pobieram (\\d+) paczkomatow$")
+	public void getParcelLockerInfo(int count) throws IOException {
+		parcelLockersInfo = restService.getParcelLockerService().getParcelLockerInfo(count);
+	}
+
+	@Then("^Zapisuje liste paczkomatow jako plik$")
+	public void saveParcelLockerInfoToFile() throws IOException {
+		Path out = Paths.get("output.txt");
+		Files.write(out, parcelLockersInfo, Charset.defaultCharset());
+
+	}
 }
