@@ -23,9 +23,10 @@ public class TestRunnerTestNG {
 
 	@Test(groups = "cucumber", description = "Runs Cucumber Feature", dataProvider = "features")
 	public void feature(CucumberFeatureWrapper cucumberFeature) {
-		seleniumCore = new SeleniumCore();
+		if (!cucumberFeature.getCucumberFeature().getPath().contains("/api/")) {
+			seleniumCore = new SeleniumCore();
+		}
 		testNGCucumberRunner.runCucumber(cucumberFeature.getCucumberFeature());
-
 	}
 
 	@DataProvider
